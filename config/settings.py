@@ -139,7 +139,7 @@ STATICFILES_STORAGE = (
 
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL")
+        default="postgresql://portfolio_user:UwDRXahHEopnIphTJNgZlnsY5EVa0EYl@dpg-d8n6lh37uimc739itbkg-a.singapore-postgres.render.com/portfolio_db_pa0m"
     )
 }
 # Static files (CSS, JavaScript, Images)
