@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
+'django_extensions',
     "rest_framework",
     "corsheaders",
 
@@ -62,7 +62,7 @@ MIDDLEWARE = [
 ]
 import os
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 ROOT_URLCONF = 'config.urls'
@@ -98,7 +98,26 @@ DATABASES = {
         "PORT": "5432",
     }
 }
+import os
+import dj_database_url
 
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=os.environ.get("DATABASE_URL")
+        )
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "portfolio",
+            "USER": "postgres",
+            "PASSWORD": "Rockbby@1322",
+            "HOST": "localhost",
+            "PORT": "5432",
+        }
+    }
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 # Password validation
@@ -137,11 +156,14 @@ STATICFILES_STORAGE = (
     "whitenoise.storage.CompressedManifestStaticFilesStorage"
 )
 
-DATABASES = {
-    "default": dj_database_url.config(
-        default="postgresql://portfolio_user:UwDRXahHEopnIphTJNgZlnsY5EVa0EYl@dpg-d8n6lh37uimc739itbkg-a.singapore-postgres.render.com/portfolio_db_pa0m"
-    )
-}
+# DATABASES = {
+#     "default": dj_database_url.config(
+#         default="postgresql://portfolio_user:UwDRXahHEopnIphTJNgZlnsY5EVa0EYl@dpg-d8n6lh37uimc739itbkg-a.singapore-postgres.render.com/portfolio_db_pa0m"
+#     )
+# }
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
