@@ -45,13 +45,16 @@ class ContactViewSet(
             f"Message:\n{contact_message.message}"
         )
 
-        send_mail(
-            "Portfolio Contact",
-            body,
-            settings.DEFAULT_FROM_EMAIL,
-            [settings.EMAIL_HOST_USER],
-            fail_silently=True,
-        )
+        try:
+            send_mail(
+                "Portfolio Contact",
+                body,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.EMAIL_HOST_USER],
+                fail_silently=False,
+            )
+        except Exception as e:
+            print("EMAIL ERROR:", str(e))
 
         return Response(
             serializer.data,
